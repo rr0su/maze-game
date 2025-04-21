@@ -1,0 +1,72 @@
+Maze Game Project Documentation
+
+Student Name: Roshan gurung
+Student ID: 10310
+Course: BSc (Hons) Cyber Security and Digital Forensics
+Module: Programming in C++
+Assignment Title: Maze Game with OOP, Inheritance, and File I/O
+Submission Date: 21-04-2025
+
+1. Project Overview
+This Maze Game is a C++ application where players navigate through a randomly generated maze. The game features object-oriented programming (OOP) principles, such as inheritance and file I/O operations, to enhance functionality. The player moves through the maze, collects items, avoids enemies, and progresses through levels. The key features include random maze generation, saving and loading game states, and dynamic gameplay mechanics.
+2. Code Structure
+The code is organized into several classes that each manage different parts of the game. These classes ensure that the game runs smoothly and the logic is easy to follow and extend.
+2.1. MazeBase Class
+The MazeBase class handles the core logic of the maze, including the layout, player movement, and rendering of the maze on the screen.
+Attributes:
+maze[MAZE_SIZE][MAZE_SIZE]: A 2D array that holds the maze grid.
+playerX, playerY: The current position of the player in the maze.
+Methods:
+generateMaze(): This method randomly generates the maze layout, placing walls and paths in random locations.
+printMaze(): Displays the maze on the screen with the appropriate symbols representing walls, player, and enemies.
+2.2. Entity Class
+The Entity class is the base class for both the player and enemies. It manages the basic properties and methods that all entities share.
+Attributes:
+x, y: The entity's current coordinates in the maze.
+symbol: A character representing the entity (e.g., 'P' for player, 'X' for enemies).
+Methods:
+move(int dx, int dy): Moves the entity by the specified amount in the X and Y directions.
+2.3. Player Class
+The Player class inherits from Entity and adds specific functionality related to player behavior, including movement, collecting items, and saving/loading game progress.
+Methods:
+collectItem(): Increases the player's score when an item is collected.
+saveGame(): Saves the current game state to a file (save.txt).
+loadGame(): Loads a previously saved game state from a file.
+2.4. Enemy Class
+The Enemy class also inherits from Entity and adds functionality specific to enemies, including random movement and collision detection.
+Methods:
+randomMove(): Moves the enemy randomly within the maze.
+checkForPlayer(): Detects if the enemy has collided with the player.
+2.5. GameFlow Class
+The GameFlow class controls the main logic of the game, from initializing the maze to managing the player's progress through different levels.
+Methods:
+startGame(): Starts the game, sets up the maze, and enters the main game loop.
+endGame(): Ends the game when the player either wins or loses.
+saveGameState(): Saves the current state of the game to a text file.
+loadGameState(): Loads the saved game state from a file.
+
+3. Game Design
+The game is designed to be a simple 2D maze game where the player needs to find the exit while avoiding enemies and collecting items. The maze is randomly generated each time the game starts, ensuring that each playthrough is unique.
+3.1. Maze Generation
+The maze layout is randomly generated using a basic algorithm that places walls, paths, items, and enemies. To ensure that the maze is solvable, I used a recursive backtracking algorithm to create a valid path from the starting point to the exit. This helps in avoiding dead ends and ensures the player can always find a way through.
+3.2. Player Movement and Interactions
+The player can move around the maze using the W, A, S, D keys. The game checks for valid moves (e.g., ensuring the player doesn't walk through walls). As the player moves, they can collect items and earn points. If the player encounters an enemy, the game ends. The enemies themselves move randomly across the maze, which adds an extra layer of challenge.
+
+4. File I/O
+To give the player the ability to save and load their progress, I used file I/O operations. The game state, including the layout of the maze, the player’s position, and the current score, is saved to a text file (save.txt). This allows the player to pick up where they left off.
+Saving the Game: The player can press a specific key to save their current progress. The game writes the relevant information (e.g., player position, score) to the save file.
+Loading the Game: The player can load a previously saved game state, allowing them to resume from where they left off.
+
+5. Error Handling
+Throughout the game, I’ve implemented error handling to ensure that the game doesn’t crash due to common issues. Here are some of the major error handling strategies I employed:
+File Error Handling: If the save.txt file is missing, corrupted, or unreadable, the game will show an error message and allow the player to start a new game.
+Invalid Moves: If the player tries to move in an invalid direction (e.g., trying to go through a wall or out of bounds), the game will prevent that move and display a warning.
+Invalid Input: I made sure to handle cases where the player enters a key other than the expected ones (W, A, S, D). The game won’t accept anything outside these inputs.
+
+6. Challenges and Solutions
+There were several challenges I faced during the development of the game, and here’s how I overcame them:
+Random Maze Generation: One of the biggest challenges was ensuring that the randomly generated maze didn’t contain isolated sections or dead ends. After a lot of trial and error, I settled on a recursive backtracking approach that guarantees a solvable maze with a valid path from start to finish.
+Enemy AI: Designing the enemy movement was tricky. I wanted the enemies to move randomly but without trapping the player. I used a simple random movement algorithm for the enemies but added collision detection to prevent them from blocking the player’s path.
+
+7. Conclusion
+This Maze Game is a great example of how to apply C++ programming techniques like OOP, randomization, and file I/O in a fun and interactive way. The project helped me learn more about game development and problem-solving in programming. From handling file operations to designing enemy AI, I gained valuable experience building a complete game.
